@@ -21,6 +21,9 @@ public class Wyswietlenia {
 
 //            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#u_0_l > div:nth-child(2) > a"))).click();
             Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
             driver.close();
         }
     }
