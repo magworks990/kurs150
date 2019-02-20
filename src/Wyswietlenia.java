@@ -24,6 +24,18 @@ public class Wyswietlenia {
             Thread.sleep(2500);
             Thread.sleep(2500);
             Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
+            Thread.sleep(2500);
             driver.close();
         }
     }
