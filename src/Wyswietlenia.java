@@ -16,8 +16,8 @@ public class Wyswietlenia {
             WebDriverWait wait = new WebDriverWait(driver, 500);
             String baseUrl = "https://www.facebook.com/pg/dzialczesci/about/";
             driver.get(baseUrl);
-//        driver.manage().window().maximize();
-//            Thread.sleep(3000);
+            driver.manage().window().maximize();
+            Thread.sleep(3000);
 
 //            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#u_0_l > div:nth-child(2) > a"))).click();
             Thread.sleep(2500);
