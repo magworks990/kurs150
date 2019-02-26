@@ -4,15 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
 public class  S6Wyklad81 {
     private WebDriver driver;
 
-    @BeforeClass
+    @BeforeTest
     public void setUp(){
         /*/~~~~~OPEN WEB BROWSER~~~~~/*/
         System.out.println("Wykonuje sie przed klasą");
@@ -23,7 +21,7 @@ public class  S6Wyklad81 {
         driver.manage().window().maximize();
     }
 
-@Test
+    @Test
     public void google() {
         String expectedTitle = "Selenium - Web Browser Automation";
         System.out.println(driver.getTitle());
@@ -31,7 +29,15 @@ public class  S6Wyklad81 {
         Assert.assertTrue(driver.getTitle().equals("Selenium - Web Browser Automation"), "Zły tytuł");
     }
 
-    @AfterClass
+    @Test
+    public void googleOpenTest() {
+        String expectedTitle = "Selenium - Web Browser Automation";
+        System.out.println(driver.getTitle());
+        Assert.assertEquals(expectedTitle, driver.getTitle());
+        Assert.assertTrue(driver.getTitle().equals("Selenium - Web Browser Automation"), "Zły tytuł");
+    }
+
+    @AfterTest
     public void tearDown(){
         System.out.println("Wykonuje sie po klasie");
         driver.quit();
