@@ -28,25 +28,22 @@ public class Wyswietlenia {
         // System.out.println("Wykonuje sie przed klasą = -> " +i);
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, 500);
-        String baseUrl = "https://www.facebook.com/pg/dzialczesci/about/";
+        String baseUrl = "https://www.facebook.com";
         driver.get(baseUrl);
         Thread.sleep(3000);
         driver.findElement(By.id("email")).sendKeys("lukasz.samsel21@wp.pl");
         driver.findElement(By.id("pass")).sendKeys("lukaszsamsel", Keys.ENTER);
         Thread.sleep(2500);
-        driver.findElement(By.id("pass")).sendKeys("lukaszsamsel", Keys.ENTER);
-        Thread.sleep(2500);
+//        driver.findElement(By.id("pass")).sendKeys("lukaszsamsel", Keys.ENTER);
         driver.get(baseUrl);
         Thread.sleep(2000);
-        driver.get("https://www.facebook.com");
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"self_bio_100001068058042\"]/div/div[2]/div/div[2]/div[1]/a"))).isDisplayed();
+        driver.get("https://www.facebook.com/groups/222664904823804/members/");
         for (int i = 0; i < 5; i++) {
             Thread.sleep(1000);
             Robot robot = new Robot();
-            JavascriptExecutor scroll = (JavascriptExecutor)driver;
-            scroll.executeScript("window.scrollBy(0, 250)","");
-           // robot.keyPress(KeyEvent.VK_PAGE_DOWN);
-
+//            JavascriptExecutor scroll = (JavascriptExecutor)driver;
+//            scroll.executeScript("window.scrollBy(0, 5000)","");
+            robot.keyPress(KeyEvent.VK_PAGE_DOWN);
         }
         Thread.sleep(1000);
         List<WebElement> elements = driver.findElements(By.className("FriendButton"));
@@ -54,8 +51,8 @@ public class Wyswietlenia {
         System.out.println(elements.size());
         elements.forEach(webElement ->
                 System.out.println(webElement.getText()));
-        int randomNumber = ThreadLocalRandom.current().nextInt(0,size);
-        System.out.println("Pokaż co wylosowałeś " +randomNumber);
+        int randomNumber = ThreadLocalRandom.current().nextInt(0, size);
+        System.out.println("Pokaż co wylosowałeś " + randomNumber);
         elements.get(randomNumber).click();
 
 
