@@ -14,12 +14,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Wyswietlenia {
-    private WebDriver driver;
-    private WebElement size;
+public class WyswietleniaTest {
 
-    @Test
-    public void facebook() throws InterruptedException, AWTException {
+    public static void main(String[] args) throws InterruptedException {
 
         /*/~~~~~OPEN WEB BROWSER~~~~~/*/
         //for (int i = 0; i < 70; i++) {
@@ -27,9 +24,6 @@ public class Wyswietlenia {
         Znalazłem wspólny ixpth ->> //div[@data-name='GroupProfileGridItem']
                                     //div[@data-name='GroupProfileGridItem']//div[@class='FriendButton']
          */
-
-
-        // System.out.println("Wykonuje sie przed klasą = -> " +i);
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, 500);
         String baseUrl = "https://www.facebook.com";
@@ -41,34 +35,70 @@ public class Wyswietlenia {
 //        driver.findElement(By.id("pass")).sendKeys("lukaszsamsel", Keys.ENTER);
         driver.get(baseUrl);
         Thread.sleep(2000);
-//        driver.get("https://www.facebook.com/groups/222664904823804/members/");
-        driver.get("https://www.facebook.com/groups/385823398185966/members/");
+        driver.get("https://www.facebook.com/groups/222664904823804/members/");
+//        driver.get("https://www.facebook.com/groups/385823398185966/members/");
+
+
         try {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
                 System.out.print("\rSkrola użyto " + i + " razy");
-                if (driver.findElement(By.id("groupsMemberBrowser")).getText().contains("Julita Skwiot")) {
+                if (driver.findElement(By.id("groupsMemberBrowser")).getText().contains("Paweł Grzegorczyk123")) {
                     System.out.println("\nStrona została przewinięta do końca");
                     break;
-                } else if (!driver.findElement(By.id("groupsMemberBrowser")).getText().contains("Julita Skwiot")) {
+                } else if (!driver.findElement(By.id("groupsMemberBrowser")).getText().contains("Paweł Grzegorczyk123")) {
                     Robot robot = new Robot();
                     JavascriptExecutor scroll = (JavascriptExecutor) driver;
                     scroll.executeScript("window.scrollBy(0, 5000)", "");
-//                    robot.keyPress(KeyEvent.VK_PAGE_DOWN);
-                } else {
                 }
             }
         } catch (Exception e) {
         }
 
-        List<WebElement> friendButtons = driver.findElements(By.className("FriendButton"));
-        int size = friendButtons.size();
-        System.out.println("Pokaż rozmiar: " +size);
-        for (WebElement friendButton : friendButtons) {
-            if (friendButton.getText().contains("Dodaj")) {
-                friendButton.click();
+        try {
+            List<WebElement> friendButtons = driver.findElements(By.className("FriendButton"));
+            int size = friendButtons.size();
+            int licznik = 0;
+            System.out.print("Pokaż rozmiar: " + size);
+            for (WebElement friendButton : friendButtons) {
+                if (friendButton.getText().contains("Dodaj")) {
+//                    Thread.sleep(6000);
+                    friendButton.click();
+                    System.out.println("Wysłano " + licznik++ +" zaproszenie");
+//                    Thread.sleep(1000);
+                }
             }
+//        } catch (WebDriverException ignored) {
+        } catch (Exception e) {
         }
+    }
+}
 
+//        try {
+//            List<WebElement> friendButtons = driver.findElements(By.className("FriendButton"));
+//            int numbers = friendButtons.size();
+//            int licznik = 0;
+//            for (WebElement friendButton : friendButtons) {
+//                Thread.sleep(2000);
+//                if (friendButton.getText().contains("Dodaj")) {
+//                    friendButton.click();
+//                    System.out.println("Wysłano " + licznik++ +" zaproszenie");
+//                    System.out.println(" ");
+//                }
+//            }
+//        } catch (WebDriverException ignored) {
+//        }
+//    }
+
+
+//        List<WebElement> friendButtons = driver.findElements(By.className("FriendButton"));
+//        int size = friendButtons.size();
+//        System.out.println("Pokaż rozmiar: " + size);
+//        for (WebElement friendButton : friendButtons) {
+//            if (friendButton.getText().contains("Dodaj")) {
+//                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("FriendButton")));
+//                friendButton.click();
+//            }
+//        }
 
 //                List <WebElement> friendsButton = (List<WebElement>) wait.until(ExpectedConditions.elementToBeClickable(By.className("FriendButton")));
 //                for (WebElement friendButton : friendsButton) {
@@ -94,10 +124,6 @@ public class Wyswietlenia {
 //                }
 
 
-
-
-
-
 //                List<WebElement> elements = driver.findElements(By.className("FriendButton"));
 //                for (int index =0; index <elements.size(); index++) {
 //                    int randomNumber = ThreadLocalRandom.current().nextInt(0, size);
@@ -106,8 +132,7 @@ public class Wyswietlenia {
 //                    elements.get(randomNumber).click();
 //                    Thread.sleep(2000);
 //                }
-            }
 
 
-    }
+
 

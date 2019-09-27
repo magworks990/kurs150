@@ -1,6 +1,7 @@
 package com.travelers.pages;
 
 import com.travelers.pages.helpers.SeleniumHelper;
+import com.travelers.pagess.ResultPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class HomePage {
+    private WebDriver driver;
     //*******************************
     @FindBy(xpath = "//span[text()='Search by Hotel or City Name']")
     private WebElement serchSpan;
@@ -39,9 +41,6 @@ public class HomePage {
     @FindBy(xpath = "//button[text()=' Search']")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//table[@class='bgwhite table table-striped']")
-    private WebElement resultsTable;
-
     @FindBy(xpath = "//div[@class= 'select2-result-label']")
     private  WebElement selectResult;
 
@@ -52,56 +51,41 @@ public class HomePage {
         this.helper = new SeleniumHelper(driver);
     }
 
-    public void sendCityHotelInput(String cityName) {
+    public HomePage setCityHotelInput(String cityName) {
         serchSpan.click();
         searchCityInput.sendKeys(cityName);
-        By locationLabel = By.xpath("//div[@class= 'select2-result-label']");
-        helper.waitForElementToByDisplay(locationLabel);
+        /* By locationLabel = By.xpath("//div[@class= 'select2-result-label']");*/
+        helper.waitForElementToBeDisplayed(selectResult);
         searchCityInput.sendKeys(Keys.ENTER);
+        return this;
     }
 
-    public void setDateRange(String checkInDate, String checkOutDate) {
+    public HomePage setDateRange(String checkInDate, String checkOutDate) {
         checkInInput.sendKeys(checkInDate);
         checkOutInput.sendKeys(checkOutDate);
         checkOutInput.click();// datapicker kalendaża zostaje
+        return this;
     }
 
-    public void openTravellersModel() {
+    public HomePage openTravellersModel() {
         travellesInput.click();
+        helper.waitForElementToBeDisplayed(adultsPlusButton);
+        return this;
     }
 
-    public void addAdult() {
+    public HomePage addAdult() {
         adultsPlusButton.click();
+        return this;
     }
 
-    public void addChild() {
+    public HomePage addChild() {
         childPlusButton.click();
+        return this;
     }
 
-    public void performSearch() {
+    public ResultPage performSearch() {
         searchButton.click();
-    }
-
-
-
-    public List<String> getHotelNames() throws AWTException, InterruptedException {
-        for (int i = 0; i < 2; i++) {
-            Robot robot = new Robot();
-            robot.keyPress(KeyEvent.VK_PAGE_DOWN);
-            Thread.sleep(1000);
-        }
-        List<String> hotelNames = new ArrayList<>();
-        List<WebElement> hotelNameWebElements = resultsTable.findElements(By.xpath("//h4//b"));
-        for (WebElement hotelNameWebElement : hotelNameWebElements) { //hotelName z kolekkcji HotlNames
-            System.out.println("Znalazłem Hotel: " + hotelNameWebElement.getText());
-            hotelNames.add(hotelNameWebElement.getText());
-        }
-        return hotelNames;
-    }
-    public List<String> getHotelPrices() {
-        List<WebElement> hotelPrices = resultsTable.findElements(By.xpath("//div[contains(@class,'price_tab')]//b"));
-        List <String> prices = hotelPrices.stream().map(element -> element.getText()).collect(Collectors.toList());
-        return prices;
+        return new ResultPage(driver);
     }
 }
 

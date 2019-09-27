@@ -13,7 +13,6 @@ public  abstract class BaseSeleniumTests {
         /*/~~~~~OPEN WEB BROWSER~~~~~/*/
         System.out.println("Before Class");
         driver = new ChromeDriver();
-//        WebDriverWait wait = new WebDriverWait(driver, 20);
         String baseUrl = "https://www.phptravels.net/";
         driver.get(baseUrl);
 //        driver.manage().window().maximize();
